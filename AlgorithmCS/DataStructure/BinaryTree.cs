@@ -8,14 +8,13 @@ namespace AlgorithmCS.DataStructure
 {
     public class BinaryTree<T> where T : IComparable<T>
     {
-
-        private Node<T> _root;
+        public Node<T> Root;
 
         public BinaryTree() { }
 
         public void Insert(T k)
         {
-            Node<T> x = _root;
+            Node<T> x = Root;
             Node<T> y = null;
             Node<T> z = new Node<T>(k);
 
@@ -26,7 +25,7 @@ namespace AlgorithmCS.DataStructure
                 else x = x._right;
             }
             z._parent = y;
-            if (y == null) _root = z;
+            if (y == null) Root = z;
             else
             {
                 if (z._key.CompareTo(y._key) < 0) y._left = z;
@@ -34,12 +33,12 @@ namespace AlgorithmCS.DataStructure
             }
         }
 
-        public void InOrder() { _inOrder(_root); }
-        public void PreOrder() { _preOrder(_root); }
+        public void InOrder() { _inOrder(Root); }
+        public void PreOrder() { _preOrder(Root); }
 
         public Node<T> Find(T k)
         {
-            Node<T> x = _root;
+            Node<T> x = Root;
             while (x != null && k.CompareTo(x._key) != 0)
             {
                 if (k.CompareTo(x._key) < 0)
@@ -67,7 +66,7 @@ namespace AlgorithmCS.DataStructure
 
             if (x != null) x._parent = y._parent;
 
-            if (y._parent == null) _root = x;
+            if (y._parent == null) Root = x;
             else if (y == y._parent._left) y._parent._left = x;
             else y._parent._right = x;
 
@@ -115,15 +114,14 @@ namespace AlgorithmCS.DataStructure
             _preOrder(u._right);
         }
 
-
-        public class Node<T> where T : IComparable<T>
-        {
-            public Node(T k) { _key = k; }
-            public T _key { get; set; }
-            public Node<T> _right { get; set; }
-            public Node<T> _left { get; set; }
-            public Node<T> _parent { get; set; }
-        }
     }
 
+    public class Node<T> where T : IComparable<T>
+    {
+        public Node(T k) { _key = k; }
+        public T _key { get; set; }
+        public Node<T> _right { get; set; }
+        public Node<T> _left { get; set; }
+        public Node<T> _parent { get; set; }
+    }
 }
